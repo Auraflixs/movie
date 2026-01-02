@@ -1,0 +1,551 @@
+:root {
+    --main-color: #8A2BE2; /* Morado estilo Auraflix */
+    --secondary-color: #6a0dad;
+    --dark-color: #141414; /* Fondo casi negro estilo Netflix */
+    --light-color: #e5e5e5;
+    --gray-color: #696969;
+    --overlay-color: rgba(0, 0, 0, 0.90);
+    --nav-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding-bottom: calc(var(--nav-height) + 20px);
+    overflow-x: hidden;
+}
+
+/* --- HEADER --- */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 4%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* --- HERO (CARRUSEL) --- */
+.hero {
+    position: relative;
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+.carousel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.carousel-slide {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.carousel-slide.active {
+    display: block;
+    animation: fadeEffect 1s;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to top, var(--dark-color) 10%, rgba(20,20,20,0.6) 50%, transparent 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 4%;
+    width: 100%;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    line-height: 1.1;
+}
+
+.hero-desc {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    max-width: 600px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background-color: var(--light-color);
+    transform: scale(1.3);
+}
+
+/* --- LISTAS DE PELÍCULAS --- */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 20px 4% 10px;
+    color: #e5e5e5;
+}
+
+.list-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 4%;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    padding: 10px 4%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.row::-webkit-scrollbar {
+    display: none;
+}
+
+.item {
+    flex: 0 0 auto;
+    width: 110px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.item:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.item-title {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.row.vertical {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-bottom: 20px;
+}
+
+.row.vertical .item {
+    width: calc(33.33% - 7px);
+    margin-bottom: 15px;
+}
+
+.row.vertical .item img {
+    height: auto;
+    aspect-ratio: 2/3;
+}
+
+/* --- MODAL (POPUP) --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-color);
+    z-index: 2000;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.modal-content {
+    background-color: #181818;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s ease-out;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- REPRODUCTOR INTEGRADO --- */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: black;
+    display: block;
+}
+
+.video-container.hidden {
+    display: none;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-info {
+    padding: 20px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.modal-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #46d369;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal-desc {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.hero-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+    background-color: white;
+    color: black;
+}
+
+.hero-btn:hover {
+    opacity: 0.8;
+}
+
+.hero-btn.info {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: white;
+}
+
+/* --- EPISODIOS CUADRADOS (Scroll Horizontal) --- */
+.season-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.season-selector select {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.episodes-list {
+    display: flex;
+    flex-direction: row; /* Horizontal */
+    gap: 10px;
+    overflow-x: auto; /* Scroll */
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    scrollbar-width: none;
+}
+
+.episodes-list::-webkit-scrollbar {
+    display: none;
+}
+
+.episode-button {
+    background: #333;
+    border: 1px solid #444;
+    color: #fff;
+    width: 50px;
+    height: 50px; /* Cuadrado */
+    flex: 0 0 auto;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.episode-button:hover {
+    background: var(--main-color);
+    border-color: var(--main-color);
+    transform: scale(1.1);
+}
+
+/* --- RECOMENDACIONES --- */
+.modal-subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    color: #e5e5e5;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+.recommendations-row {
+    margin: 0 -20px;
+    padding: 10px 20px;
+}
+
+/* --- PANELES (Opciones, Search, Profile) --- */
+.panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    max-width: 350px;
+    height: 100%;
+    background-color: #1a1a1a;
+    z-index: 2500;
+    padding: 60px 20px 20px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    animation: slideLeft 0.3s;
+}
+
+.close-panel {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.admin-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.auth-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px;
+    text-align: left;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.search-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-color);
+    z-index: 2200;
+    padding: 70px 4% 20px;
+    overflow-y: auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px;
+    background: #222;
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    color: white;
+    font-size: 1.2rem;
+    outline: none;
+    border-radius: 4px 4px 0 0;
+}
+
+.close-search {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- NAV INFERIOR --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: #121212;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1500;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.7rem;
+    flex: 1;
+    height: 100%;
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: white;
+}
+
+.nav-item.active i {
+    color: var(--main-color);
+}
+
+.hidden { display: none !important; }
+
+@keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes slideLeft { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+@media (min-width: 768px) {
+    .modal { align-items: center; }
+    .modal-content { border-radius: 12px; }
+    .hero { height: 80vh; }
+    .row.vertical .item { width: calc(20% - 8px); }
+}
