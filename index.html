@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auraflix+</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AURAFLIX+</div>
+    </header>
+
+    <div id="mainContent">
+        <section id="hero" class="hero">
+            <div class="carousel-container"></div>
+            <div class="hero-gradient"></div>
+            <div id="heroDots" class="carousel-indicators"></div>
+        </section>
+
+        <div class="list-title-container">
+            <h2 class="section-title">Continuar viendo</h2>
+        </div>
+        <div id="continueWatching" class="row horizontal"></div>
+
+        <h2 class="section-title">Películas</h2>
+        <div id="moviesRow" class="row horizontal"></div>
+
+        <h2 class="section-title">Series</h2>
+        <div id="seriesRow" class="row horizontal"></div>
+    </div>
+
+    <div id="filterContent" class="hidden">
+        <h2 id="filterTitle" class="section-title"></h2>
+        <div id="filteredRow" class="row vertical"></div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-modal"><i class="fas fa-times"></i></button>
+            
+            <div id="modalContentPlayer"></div>
+            
+            <div class="modal-info">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <div class="modal-meta">
+                    <span id="modalYear" class="modal-year"></span>
+                    <span id="modalType" class="modal-type"></span>
+                </div>
+                <p id="modalDesc" class="modal-desc"></p>
+                
+                <div id="seriesEpisodeSelector" class="hidden">
+                    <div class="season-selector">
+                        <label>Capítulos:</label>
+                        <select id="modalSeasonSelect"></select>
+                    </div>
+                    <div id="modalEpisodesContainer" class="episodes-list"></div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="modalPlayBtn" class="hero-btn"><i class="fas fa-play"></i> Reproducir</button>
+                    <button id="modalTrailerBtn" class="hero-btn info"><i class="fas fa-film"></i> Trailer</button>
+                </div>
+
+                <h3 class="modal-subtitle">Recomendados</h3>
+                <div id="modalRecommendations" class="row horizontal recommendations-row"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchOverlay" class="search-overlay">
+        <button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button>
+        <div class="search-box">
+            <input id="searchInput" type="text" placeholder="Buscar título...">
+        </div>
+        <div id="searchResults" class="row vertical"></div>
+    </div>
+
+    <div id="optionsPanel" class="panel">
+        <button id="closeOptionsPanel" class="close-panel"><i class="fas fa-times"></i></button>
+        <h2>Opciones</h2>
+        <div class="admin-options">
+            <button id="profileBtn" class="auth-btn">Mi Perfil</button>
+            <button id="helpBtn" class="auth-btn">Ayuda y Soporte</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" id="bottomMenuBtn" class="nav-item active"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#" id="moviesNavBtnBottom" class="nav-item"><i class="fas fa-film"></i> Películas</a>
+        <a href="#" id="seriesNavBtnBottom" class="nav-item"><i class="fas fa-tv"></i> Series</a>
+        <a href="#" id="searchNavBtn" class="nav-item"><i class="fas fa-search"></i> Buscar</a>
+    </nav>
+
+    <script src="itserie.js"></script>
+    <script src="strangerthings.js"></script>
+    <script src="hermanastrafea.js"></script>
+    <script src="dracula.js"></script>
+    <script src="conjuro4.js"></script>
+    <script src="telefononegro2.js"></script>
+    <script src="avatar3.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
