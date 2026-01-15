@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Auraflix+</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AURAFLIX+</div>
+    </header>
+
+    <div id="mainContent">
+        <div id="view-home">
+            <section id="hero" class="hero">
+                <div class="carousel-container"></div>
+                <div class="hero-gradient"></div>
+                <div id="heroDots" class="carousel-indicators"></div>
+            </section>
+
+            <div id="continueWatchingContainer" class="hidden">
+                <h2 class="section-title">Continuar viendo</h2>
+                <div id="continueWatching" class="row horizontal-scroll"></div>
+            </div>
+
+            <h2 class="section-title">Recién agregadas</h2>
+            <div id="newlyAddedRow" class="row horizontal-scroll"></div>
+
+            <h2 class="section-title">Películas Destacadas</h2>
+            <div id="homeMoviesRow" class="row grid-layout"></div>
+
+            <h2 class="section-title">Series Destacadas</h2>
+            <div id="homeSeriesRow" class="row grid-layout"></div>
+        </div>
+
+        <div id="view-movies" class="hidden full-page-view">
+            <h2 class="section-title-large">Todas las Películas</h2>
+            <div id="allMoviesGrid" class="row grid-layout"></div>
+        </div>
+
+        <div id="view-series" class="hidden full-page-view">
+            <h2 class="section-title-large">Todas las Series</h2>
+            <div id="allSeriesGrid" class="row grid-layout"></div>
+        </div>
+    </div>
+
+    <!-- Modal de video -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-modal"><i class="fas fa-arrow-left"></i></button>
+            
+            <!-- REPRODUCTOR ESTILO MHDPLAYER -->
+            <div id="modalContentPlayer" class="player-wrapper">
+                <!-- VIDEO SIN CONTROLES NATIVOS -->
+                <video id="modalVideo" src="" preload="metadata"></video>
+                
+                <!-- OVERLAY OPCIONAL -->
+                <div class="video-overlay-label" id="modalOverlayLabel">HD 1080p</div>
+
+                <!-- CONTROLES PERSONALIZADOS -->
+                <div class="custom-controls">
+                    <button id="modalPlayPause">▶️</button>
+                    <input type="range" id="modalProgress" value="0" min="0" max="100">
+                    <span id="modalTime">0:00 / 0:00</span>
+                    <button id="modalFullscreen">⛶</button>
+                </div>
+            </div>
+            
+            <div class="modal-info">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <div class="modal-meta">
+                    <span id="modalYear" class="modal-year"></span>
+                    <span id="modalType" class="modal-type"></span>
+                </div>
+                <div class="modal-actions">
+                    <button id="modalActionBtn" class="hero-btn info"><i class="fas fa-film"></i> Ver Tráiler</button>
+                </div>
+                <p id="modalDesc" class="modal-desc"></p>
+                
+                <div id="seriesEpisodeSelector" class="hidden">
+                    <div class="season-selector">
+                        <label>Seleccionar Temporada:</label>
+                        <select id="modalSeasonSelect"></select>
+                    </div>
+                    <div id="modalEpisodesContainer" class="episodes-list"></div>
+                </div>
+
+                <h3 class="modal-subtitle">Recomendados</h3>
+                <div id="modalRecommendations" class="row grid-layout recommendations-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchOverlay" class="search-overlay">
+        <button id="closeSearch" class="close-search"><i class="fas fa-times"></i></button>
+        <div class="search-box">
+            <input id="searchInput" type="text" placeholder="Buscar título...">
+        </div>
+        <div id="searchResults" class="row grid-layout"></div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" id="nav-home" class="nav-item active"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#" id="nav-movies" class="nav-item"><i class="fas fa-film"></i> Películas</a>
+        <a href="#" id="nav-series" class="nav-item"><i class="fas fa-tv"></i> Series</a>
+        <a href="#" id="nav-search" class="nav-item"><i class="fas fa-search"></i> Buscar</a>
+    </nav>
+
+    <script>
+        window.allContentSequence = [];
+        window.moviesList = [];
+        window.seriesList = [];
+
+        function interceptPush(array, name) {
+            const originalPush = array.push;
+            array.push = function(...items) {
+                const result = originalPush.apply(this, items);
+                window.allContentSequence.push(...items);
+                return result;
+            };
+        }
+        interceptPush(window.moviesList, 'movies');
+        interceptPush(window.seriesList, 'series');
+    </script>
+
+    <script src="itserie.js"></script>
+    <script src="strangerthings.js"></script>
+    <script src="hermanastrafea.js"></script>
+    <script src="dracula.js"></script>
+    <script src="conjuro4.js"></script>
+    <script src="telefononegro2.js"></script>
+    <script src="nightsfreddy.js"></script>
+    <script src="merlina.js"></script>
+    <script src="terrifier.js"></script>
+    <script src="m3gan2.js"></script>
+    <script src="tronares.js"></script>
+    <script src="weapons.js"></script>
+    <script src="frankenstein.js"></script>
+    
+    <script src="script.js"></script>
+
+    <!-- SCRIPT DEL REPRODUCTOR ESTILO MHDPLAYER -->
+    <script>
+        const modalVideo = document.getElementById('modalVideo');
+        const playPauseBtn = document.getElementById('modalPlayPause');
+        const progressBar = document.getElementById('modalProgress');
+        const timeDisplay = document.getElementById('modalTime');
+        const fullscreenBtn = document.getElementById('modalFullscreen');
+
+        // Abrir modal con video (ejemplo)
+        function openVideoModal(videoUrl, title, year, type) {
+            modalVideo.src = videoUrl; 
+            modalVideo.load(); 
+            modalVideo.play();
+
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalYear').innerText = year;
+            document.getElementById('modalType').innerText = type;
+
+            document.getElementById('videoModal').style.display = 'flex';
+            document.body.classList.add('modal-open');
+
+            playPauseBtn.textContent = "⏸️";
+        }
+
+        // Cerrar modal
+        document.getElementById('closeModal').addEventListener('click', () => {
+            modalVideo.pause();
+            modalVideo.src = "";
+            document.getElementById('videoModal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+        });
+
+        // Play/Pause
+        playPauseBtn.addEventListener('click', () => {
+            if(modalVideo.paused) {
+                modalVideo.play();
+                playPauseBtn.textContent = "⏸️";
+            } else {
+                modalVideo.pause();
+                playPauseBtn.textContent = "▶️";
+            }
+        });
+
+        // Actualizar barra y tiempo
+        modalVideo.addEventListener('timeupdate', () => {
+            if (!modalVideo.duration) return;
+            progressBar.value = (modalVideo.currentTime / modalVideo.duration) * 100;
+            const current = Math.floor(modalVideo.currentTime);
+            const duration = Math.floor(modalVideo.duration);
+            const formatTime = (t) => `${Math.floor(t/60)}:${('0'+(t%60)).slice(-2)}`;
+            timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+        });
+
+        // Cambiar tiempo desde la barra
+        progressBar.addEventListener('input', () => {
+            modalVideo.currentTime = (progressBar.value / 100) * modalVideo.duration;
+        });
+
+        // Fullscreen
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                modalVideo.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
