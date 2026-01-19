@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Auraflix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <input type="file" id="customAvatarInput" accept="image/*" style="display: none;">
+
+    <div id="loginScreen" class="login-overlay">
+        <div class="login-content">
+            <h2>Bienvenido a Auraflix</h2>
+            <p>Configura tu perfil para continuar</p>
+            <div class="input-group">
+                <input type="text" id="usernameInput" placeholder="Tu nombre" maxlength="15">
+            </div>
+            <p class="select-avatar-text">Elige tu avatar:</p>
+            <div id="avatarGrid" class="avatar-grid"></div>
+            <button id="saveProfileBtn" class="login-btn">Entrar <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div id="changeAvatarModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Cambiar Avatar</h2>
+            <div id="changeAvatarGrid" class="avatar-grid"></div>
+            <div class="modal-buttons-row">
+                <button id="closeAvatarModal" class="cancel-btn">Cancelar</button>
+                <button id="confirmAvatarChange" class="login-btn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="login-overlay">
+        <div class="login-content terms-content">
+            <h2 class="modal-title-gray">Términos y Condiciones</h2>
+            <div class="terms-text-container">
+                <h3>1. DESCRIPCIÓN DEL SERVICIO</h3>
+                <p>La App proporciona información, organización y enlaces relacionados con películas y series con fines únicamente informativos y de entretenimiento. La App no aloja, reproduce ni distribuye directamente ningún contenido audiovisual en sus servidores.</p>
+                
+                <h3>2. CONTENIDO DE TERCEROS</h3>
+                <p>Los enlaces, reproductores o contenidos mostrados en la App pueden pertenecer a terceros. La App no se responsabiliza por la disponibilidad, calidad, legalidad o veracidad del contenido ofrecido por sitios externos.</p>
+                
+                <h3>3. DERECHOS DE AUTOR</h3>
+                <p>Todo el material audiovisual al que se hace referencia en la App pertenece a sus respectivos propietarios. La App no reclama derechos de autor sobre películas, series, logotipos o marcas mostradas.</p>
+                
+                <h3>4. USO ADECUADO</h3>
+                <p>El usuario se compromete a utilizar la App de manera responsable y legal, y a no emplearla para actividades ilícitas, fraudulentas o que vulneren derechos de terceros.</p>
+                
+                <h3>5. LIMITACIÓN DE RESPONSABILIDAD</h3>
+                <p>La App no será responsable por daños directos o indirectos derivados del uso o imposibilidad de uso del servicio, ni por problemas técnicos, fallos de conexión o contenido externo.</p>
+                
+                <h3>6. MODIFICACIONES</h3>
+                <p>La App se reserva el derecho de modificar, actualizar o eliminar estos Términos y Condiciones en cualquier momento, sin previo aviso. El uso continuado de la App implica la aceptación de dichos cambios.</p>
+                
+                <h3>7. ENLACES EXTERNOS</h3>
+                <p>La App puede contener enlaces a sitios web externos. No se tiene control sobre dichos sitios ni sobre sus políticas, por lo que la App no asume responsabilidad alguna por ellos.</p>
+                
+                <h3>8. SUSPENSIÓN DEL SERVICIO</h3>
+                <p>La App puede suspender o finalizar el acceso al servicio en cualquier momento, ya sea por mantenimiento, actualizaciones o cualquier otra causa, sin obligación de previo aviso.</p>
+                
+                <h3>9. ACEPTACIÓN</h3>
+                <p>Al usar la App, el usuario declara haber leído, entendido y aceptado estos Términos y Condiciones en su totalidad.</p>
+            </div>
+            <button id="closeTermsBtn" class="login-btn" style="margin-top:15px; width:100%;">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="supportModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Soporte</h2>
+            <div style="text-align: left; color: #ccc; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;">
+                <p style="margin-bottom: 10px;">¿Tienes alguna sugerencia, quieres pedir una película o encontraste un error?</p>
+                <p style="margin-bottom: 15px;">Escríbenos y con gusto revisaremos tu solicitud. Tu apoyo nos ayuda a mejorar la app y ofrecerte una mejor experiencia.</p>
+                <p style="color: #8A2BE2; font-weight: bold;">correo: auramovies001@gmail.com</p>
+            </div>
+            <button id="closeSupportBtn" class="login-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Configuración</h2>
+            <div style="margin-top: 20px; margin-bottom: 20px;">
+                <button id="btnCache" class="profile-action-btn" style="margin-bottom: 15px; text-align: center;">Borrar Caché</button>
+                <p class="app-version">Versión 1.0.1</p>
+            </div>
+            <button id="closeSettingsBtn" class="cancel-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">Auraflix</div>
+        </div>
+        <div class="header-right" id="headerRightIcons">
+            <button id="topSearchBtn" class="header-icon-btn"><i class="fas fa-search"></i></button>
+            <button id="topHistoryBtn" class="header-icon-btn"><i class="fas fa-clock"></i></button>
+        </div>
+    </header>
+
+    <div id="mainContent">
+        <div id="view-home">
+            <section id="hero" class="hero">
+                <div class="carousel-container"></div>
+                <div class="hero-gradient"></div>
+                <div id="heroDots" class="carousel-indicators"></div>
+            </section>
+            <h2 class="section-title">Recién agregadas</h2>
+            <div id="newlyAddedRow" class="row horizontal-scroll"></div>
+            <h2 class="section-title">Películas Destacadas</h2>
+            <div id="homeMoviesRow" class="multi-row-container"></div>
+            <h2 class="section-title">Series Destacadas</h2>
+            <div id="homeSeriesRow" class="multi-row-container"></div>
+        </div>
+
+        <div id="view-movies" class="hidden full-page-view">
+            <h2 class="section-title-large">Películas</h2>
+            <div id="allMoviesGrid" class="row grid-layout"></div>
+        </div>
+
+        <div id="view-series" class="hidden full-page-view">
+            <h2 class="section-title-large">Series</h2>
+            <div id="allSeriesGrid" class="row grid-layout"></div>
+        </div>
+
+        <div id="view-profile" class="hidden full-page-view profile-view-container">
+            <div class="profile-header">
+                <div class="profile-img-wrapper">
+                    <img id="profilePageImg" src="" alt="Avatar" class="profile-big-img">
+                    <div class="edit-icon"><i class="fas fa-pen"></i></div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profilePageName" class="profile-name">Usuario</h2>
+                    <span class="profile-badge">Miembro</span>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Mi Lista</h2>
+            <div id="myListRow" class="row horizontal-scroll" style="min-height: 120px;"></div>
+            
+            <div class="profile-menu">
+                <button id="btnSupport" class="profile-action-btn">Soporte</button>
+                <button id="btnBroadcast" class="profile-action-btn">Difusión</button>
+                <button id="btnTerms" class="profile-action-btn">Términos y Condiciones</button>
+                <button id="btnShare" class="profile-action-btn">Compartir App</button>
+                <button id="btnSettings" class="profile-action-btn">Configuración</button>
+            </div>
+
+            <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-modal"><i class="fas fa-arrow-left"></i></button>
+            <div id="modalContentPlayer" class="player-wrapper"></div>
+            <div class="modal-info">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <div class="modal-meta">
+                    <span id="modalYear" class="modal-year"></span>
+                    <span id="modalType" class="modal-type"></span>
+                </div>
+                
+                <div class="modal-actions-row">
+                    <button id="modalActionBtn" class="hero-btn info"><i class="fas fa-film"></i> Ver Tráiler</button>
+                    <button id="modalFavBtn" class="fav-btn"><i class="fas fa-heart"></i></button>
+                </div>
+
+                <p id="modalDesc" class="modal-desc"></p>
+                <div id="seriesEpisodeSelector" class="hidden">
+                    <div class="season-selector">
+                        <label>Seleccionar Temporada:</label>
+                        <select id="modalSeasonSelect"></select>
+                    </div>
+                    <div id="modalEpisodesContainer" class="episodes-list"></div>
+                </div>
+                <h3 class="modal-subtitle">Recomendados</h3>
+                <div id="modalRecommendations" class="row grid-layout recommendations-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchOverlay" class="search-overlay">
+        <div class="overlay-header">
+            <h2 class="overlay-title">Buscar</h2>
+            <button id="closeSearch" class="close-overlay"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="search-box">
+            <input id="searchInput" type="text" placeholder="Buscar título...">
+        </div>
+        <div id="searchResults" class="row grid-layout"></div>
+    </div>
+
+    <div id="historyOverlay" class="search-overlay">
+        <div class="overlay-header">
+            <h2 class="overlay-title">Continuar viendo</h2>
+            <button id="closeHistory" class="close-overlay"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="historyResults" class="row grid-layout" style="padding: 0 4%;"></div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" id="nav-home" class="nav-item active"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#" id="nav-movies" class="nav-item"><i class="fas fa-film"></i> Películas</a>
+        <a href="#" id="nav-series" class="nav-item"><i class="fas fa-tv"></i> Series</a>
+        <a href="#" id="nav-profile" class="nav-item">
+            <div class="nav-profile-img-container">
+                <img id="navProfileImg" src="" alt="P">
+            </div>
+            Perfil
+        </a>
+    </nav>
+
+    <script src="perfil.js"></script>
+    <script src="peli3.js"></script>
+    <script src="serie3.js"></script>
+    <script src="peli5.js"></script>
+    <script src="peli1.js"></script>
+    <script src="peli2.js"></script>
+    <script src="peli4.js"></script>
+    <script src="serie2.js"></script>
+    <script src="peli6.js"></script>
+    <script src="peli7.js"></script>
+    <script src="serie4.js"></script>
+    <script src="peli8.js"></script>
+    <script src="peli9.js"></script>
+    <script src="serie1.js"></script>
+    <script src="peli10.js"></script>
+    <script src="peli11.js"></script>
+    <script src="peli12.js"></script>
+    <script src="peli13.js"></script>
+    <script src="peli14.js"></script>
+    <script src="peli15.js"></script>
+    <script src="peli16.js"></script>
+    <script src="peli17.js"></script>
+    <script src="peli18.js"></script>
+    <script src="peli19.js"></script>
+    <script src="peli20.js"></script>
+    <script src="peli21.js"></script>
+    <script src="id.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
