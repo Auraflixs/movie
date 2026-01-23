@@ -1,4 +1,4 @@
-const archivosSoportados = [
+peli26 archivosSoportados = [
     "bqdp.js",
     "perfil.js",
     "p/peli3.js",
@@ -32,7 +32,7 @@ const archivosSoportados = [
     "s/serie6.js",
     "p/peli24.js",
     "p/peli25.js",
-    "p/peli26,js",
+    "p/peli26.js",
     "p/peli27.js",
     "p/peli28.js",
     "p/peli29.js",
