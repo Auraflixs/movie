@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Auraflix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <input type="file" id="customAvatarInput" accept="image/*" style="display: none;">
+
+    <div id="loginScreen" class="login-overlay">
+        <div class="login-content">
+            <h2>Bienvenido a Auraflix</h2>
+            <p>Configura tu perfil para continuar</p>
+            <div class="input-group">
+                <input type="text" id="usernameInput" placeholder="Tu nombre" maxlength="15">
+            </div>
+            <p class="select-avatar-text">Elige tu avatar:</p>
+            <div id="avatarGrid" class="avatar-grid"></div>
+            <button id="saveProfileBtn" class="login-btn">Entrar <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div id="changeAvatarModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Cambiar Avatar</h2>
+            <div id="changeAvatarGrid" class="avatar-grid"></div>
+            <div class="modal-buttons-row">
+                <button id="closeAvatarModal" class="cancel-btn">Cancelar</button>
+                <button id="confirmAvatarChange" class="login-btn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="filterModal" class="login-overlay">
+        <div class="login-content filter-content-box">
+            <div class="filter-header-row">
+                <h2 class="modal-title-gray">Filtrar por Género</h2>
+                <button id="closeFilterModal" class="close-icon-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="genresContainer" class="genres-grid"></div>
+            <div class="modal-buttons-row" style="margin-top: 20px;">
+                <button id="clearFiltersBtn" class="cancel-btn">Limpiar</button>
+                <button id="applyFiltersBtn" class="login-btn">Aplicar Filtros</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="login-overlay">
+        <div class="login-content terms-content">
+            <h2 class="modal-title-gray">Términos y Condiciones</h2>
+            <div class="terms-text-container">
+                <h3>1. SERVICIO</h3>
+                <p>La App proporciona información con fines informativos.</p>
+                <h3>2. CONTENIDO</h3>
+                <p>No alojamos contenido en servidores propios.</p>
+            </div>
+            <button id="closeTermsBtn" class="login-btn" style="margin-top:15px; width:100%;">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="supportModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Soporte</h2>
+            <div style="text-align: left; color: #ccc; margin-bottom: 20px;">
+                <p>Contáctanos para reportar errores o pedidos.</p>
+                <p style="color: #8A2BE2; font-weight: bold;">auramovies001@gmail.com</p>
+            </div>
+            <button id="closeSupportBtn" class="login-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Configuración</h2>
+            <div style="margin-top: 20px; margin-bottom: 20px;">
+                <button id="btnCache" class="profile-action-btn" style="text-align: center;">Borrar Caché</button>
+                <p class="app-version">Versión 1.0.9</p>
+            </div>
+            <button id="closeSettingsBtn" class="cancel-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="shareModal" class="login-overlay">
+        <div class="login-content">
+            <h2 class="modal-title-gray">Compartir</h2>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
+                <button id="btnShareAppVersion" class="profile-action-btn" style="text-align: center;">
+                    <i class="fas fa-mobile-alt"></i> Compartir App
+                </button>
+                <button id="btnShareWebVersion" class="profile-action-btn" style="text-align: center;">
+                    <i class="fas fa-globe"></i> Compartir Web
+                </button>
+            </div>
+            <button id="closeShareModal" class="cancel-btn">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="seasonSelectorModal" class="season-modal-overlay">
+        <div class="season-modal-content">
+            <h3 class="season-modal-title">Seleccionar temporada</h3>
+            <div id="seasonListContainer" class="season-list-container"></div>
+            <button id="closeSeasonSelector" class="cancel-btn" style="margin-top:15px; width:100%;">Cancelar</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">Auraflix</div>
+        </div>
+        <div class="header-right" id="headerRightIcons">
+            <button id="topSearchBtn" class="header-icon-btn"><i class="fas fa-search"></i></button>
+            <button id="topHistoryBtn" class="header-icon-btn"><i class="fas fa-clock"></i></button>
+        </div>
+    </header>
+
+    <div id="mainContent">
+        <div id="view-home">
+            <section id="hero" class="hero">
+                <div class="carousel-container"></div>
+                <div class="hero-gradient"></div>
+                <div id="heroDots" class="carousel-indicators"></div>
+            </section>
+            
+            <h2 class="section-title">Últimamente nuevo</h2>
+            <div id="latelyNewGrid" class="row grid-layout"></div>
+            
+            <h2 class="section-title">Recién agregadas</h2>
+            <div id="newlyAddedRow" class="row horizontal-scroll"></div>
+            <h2 class="section-title">Películas Destacadas</h2>
+            <div id="homeMoviesRow" class="multi-row-container"></div>
+            <h2 class="section-title">Series Destacadas</h2>
+            <div id="homeSeriesRow" class="multi-row-container"></div>
+        </div>
+
+        <div id="view-movies" class="hidden full-page-view">
+            <div class="section-header-flex">
+                <h2 class="section-title-large no-margin">Películas</h2>
+                <button id="btnFilterMovies" class="filter-toggle-btn"><i class="fas fa-sliders-h"></i> Filtrar</button>
+            </div>
+            <div id="activeFiltersMovies" class="active-filters-display"></div>
+            <div id="allMoviesGrid" class="row grid-layout"></div>
+        </div>
+
+        <div id="view-series" class="hidden full-page-view">
+            <div class="section-header-flex">
+                <h2 class="section-title-large no-margin">Series</h2>
+                <button id="btnFilterSeries" class="filter-toggle-btn"><i class="fas fa-sliders-h"></i> Filtrar</button>
+            </div>
+            <div id="activeFiltersSeries" class="active-filters-display"></div>
+            <div id="allSeriesGrid" class="row grid-layout"></div>
+        </div>
+
+        <div id="view-profile" class="hidden full-page-view profile-view-container">
+            <div class="profile-header">
+                <div class="profile-img-wrapper">
+                    <img id="profilePageImg" src="" alt="Avatar" class="profile-big-img">
+                    <div class="edit-icon"><i class="fas fa-pen"></i></div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profilePageName" class="profile-name">Usuario</h2>
+                    <span class="profile-badge">Miembro</span>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Mi Lista</h2>
+            <div id="myListRow" class="row horizontal-scroll" style="min-height: 120px;"></div>
+            
+            <div class="profile-menu">
+                <button id="btnSupport" class="profile-action-btn">Soporte</button>
+                <button id="btnBroadcast" class="profile-action-btn">Difusión</button>
+                <button id="btnTerms" class="profile-action-btn">Términos y Condiciones</button>
+                <button id="btnShare" class="profile-action-btn">Compartir</button>
+                <button id="btnSettings" class="profile-action-btn">Configuración</button>
+            </div>
+            <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-modal"><i class="fas fa-arrow-left"></i></button>
+            <div id="modalContentPlayer" class="player-wrapper"></div>
+            <div class="modal-info">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <div class="modal-meta">
+                    <span id="modalYear" class="modal-year"></span>
+                    <span id="modalSeparator" class="modal-separator">|</span>
+                    <span id="modalGenres" class="modal-genres"></span>
+                </div>
+                
+                <div class="modal-actions-row">
+                    <button id="modalActionBtn" class="hero-btn info"><i class="fas fa-film"></i> Ver Tráiler</button>
+                    <button id="modalFavBtn" class="fav-btn"><i class="fas fa-heart"></i></button>
+                </div>
+
+                <p id="modalDesc" class="modal-desc"></p>
+                
+                <div id="seriesEpisodeSelector" class="hidden">
+                    <div class="season-trigger-container">
+                        <label>Temporada:</label>
+                        <button id="btnOpenSeasonModal" class="season-trigger-btn">
+                            <span id="currentSeasonText">Temporada 1</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div id="modalEpisodesContainer" class="episodes-list"></div>
+                </div>
+                
+                <h3 class="modal-subtitle">Recomendados</h3>
+                <div id="modalRecommendations" class="row grid-layout recommendations-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchOverlay" class="search-overlay">
+        <div class="overlay-header">
+            <h2 class="overlay-title">Buscar</h2>
+            <button id="closeSearch" class="close-overlay"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="search-box">
+            <input id="searchInput" type="text" placeholder="Buscar título...">
+            <div class="popular-search-container">
+                <p>Búsqueda popular</p>
+                <div id="popularTags" class="popular-tags-flex"></div>
+            </div>
+        </div>
+        <div id="searchResults" class="row grid-layout"></div>
+    </div>
+
+    <div id="historyOverlay" class="search-overlay">
+        <div class="overlay-header">
+            <h2 class="overlay-title">Continuar viendo</h2>
+            <button id="closeHistory" class="close-overlay"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="historyResults" class="row grid-layout" style="padding: 0 4%;"></div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" id="nav-home" class="nav-item active"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#" id="nav-movies" class="nav-item"><i class="fas fa-film"></i> Películas</a>
+        <a href="#" id="nav-series" class="nav-item"><i class="fas fa-tv"></i> Series</a>
+        <a href="#" id="nav-profile" class="nav-item">
+            <div class="nav-profile-img-container">
+                <img id="navProfileImg" src="" alt="P">
+            </div>
+            Perfil
+        </a>
+    </nav>
+
+    <script>
+        window.globalContent = [];
+        const createTrackedArray = () => {
+            const arr = [];
+            const originalPush = arr.push;
+            arr.push = function(...items) {
+                items.forEach(item => { window.globalContent.push(item); });
+                return originalPush.apply(this, items);
+            };
+            return arr;
+        };
+        window.moviesList = createTrackedArray();
+        window.seriesList = createTrackedArray();
+    </script>
+    
+    <script src="cargador.js"></script>
+</body>
+</html>
+
+
