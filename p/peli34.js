@@ -4,7 +4,7 @@ window.moviesList.push({
     id: "p34",
     title: "Blanca Nieves",
     tags: ["Blanca Nieves y los siete enanos", "Snow White"],
-    image: "xhttps://raw.githubusercontent.com/yoldkwlws/Stranger-things/refs/heads/main/tWnRFoToYWCKuDEKXH3oki0KGs0.jpg",
+    image: "https://raw.githubusercontent.com/yoldkwlws/Stranger-things/refs/heads/main/tWnRFoToYWCKuDEKXH3oki0KGs0.jpg",
     trailer: "https://www.youtube.com/embed/k7Qj5rDhAqU",
     video: "https://vimeos.net/embed-szheyajo20uw.html",
     year: 2025,
