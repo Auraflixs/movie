@@ -14,8 +14,8 @@ window.seriesList.push({
         {
             season: 1,
             episodes: [
-                { episode: 1, video: "https://vimeos.net/embed-2jgybzcof3h2.html" }, { episode: 2, video: "https://vimeos.net/embed-mrknbdc8279d.html" }, { episode: 3, video: "" },
-                { episode: , video: "" }, { episode: 5, video: "" }, { episode: 6, video: "" }
+                { episode: 1, video: "https://vimeos.net/embed-2jgybzcof3h2.html" }, { episode: 2, video: "https://vimeos.net/embed-mrknbdc8279d.html" }; { episode: 3, video: "" },
+                { episode: 4, video: "" }, { episode: 5, video: "" }, { episode: 6, video: "" }
             ]
         }
     ]
