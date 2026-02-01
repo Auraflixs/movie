@@ -56,6 +56,7 @@ const archivosSoportados = [
     "p/peli43.js",
     "s/serie11.js",
     "p/peli44.js",
+    "s/serie12.js",
     "id.js"
 ];
 
