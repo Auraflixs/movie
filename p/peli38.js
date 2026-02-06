@@ -6,7 +6,7 @@ window.moviesList.push({
     tags: ["El hogar"],
     image: "https://raw.githubusercontent.com/yoldkwlws/Stranger-things/refs/heads/main/r0NUt1M62StNgvSLmLsmJADbHpg.jpg",
     trailer: "https://www.youtube.com/embed/i86P9cBvtoM",
-    video: "https://auramovies001.wistia.com/medias/mj71tj27ni",
+    video: "https://auramovies001.wistia.com/medias/mj71tj27ni/analytics?utm_source=media-embed&utm_medium=link&utm_campaign=analytics-share",
     year: 2025,
     genres: ["Misterio", "Terror", "Suspenso"],
     info: "Max, un joven con problemas que empieza a trabajar en una residencia de ancianos, descubre rápidamente que los residentes y los cuidadores esconden secretos siniestros. A medida que explora los pasillos prohibidos y las áreas restringidas del edificio, se da cuenta de que su conexión con la institución es mucho más profunda de lo que imaginaba, enfrentándose a un horror que desafía toda lógica.",
