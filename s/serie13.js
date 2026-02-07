@@ -14,7 +14,7 @@ window.seriesList.push({
         {
             season: 1,
             episodes: [
-                { episode: 1, video: "https://dropload.tv/e/zry0kfc7902u" }, { episode: 2, video: "https://dropload.tv/e/a25z1s81nb38" }, { episode: 3, video: "https://dropload.tv/e/go7m34zel88r" }, { episode: 4, video: "" },
+                { episode: 1, video: "https://dropload.tv/e/zry0kfc7902u" }, { episode: 2, video: "https://dropload.tv/e/a25z1s81nb38" }, { episode: 3, video: "https://dropload.tv/e/go7m34zel88r" }, { episode: 4, video: "https://dropload.pro/e/do2kzn6lt4eb"" },
                 { episode: 5, video: "https://dropload.tv/e/do2kzn6lt4eb" }, { episode: 6, video: "https://dropload.tv/e/w2l36vl0v0o8" }, { episode: 7, video: "https://dropload.tv/e/fk7tq8fbcc3t" }, { episode: 8, video: "https://dropload.tv/e/16oconjfz5nh" }
             ]
         },
