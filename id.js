@@ -24,7 +24,7 @@ window.HERO_IDS = [
 window.LATELY_IDS = [
     "s12",
     "s11",
-    "s3",
+    "s19",
     "p22",
     "p38",
     "p44",
