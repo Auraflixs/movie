@@ -1,7 +1,7 @@
 // --- CONFIGURACIÓN DE ENLACES Y CÓDIGOS VIP ---
 const VIP_CONFIG = {
     // 1. Enlace del video tutorial (Embed)
-    tutorialVideo: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
+    tutorialVideo: "https://dropload.pro/e/289c0csjj3bd", 
 
     // 2. Configuración por Días (7 Días)
     // El sistema busca la fecha de hoy. Si coincide, usa ese código y enlace.
