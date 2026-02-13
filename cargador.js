@@ -1,8 +1,8 @@
 const archivosSoportados = [
     "link.js",
     "bqdp.js",
-    "s/serie20.js",
     "perfil.js",
+    "s/serie20.js",
     "p/peli3.js",
     "s/serie3.js",
     "p/peli5.js",
