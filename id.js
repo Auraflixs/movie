@@ -22,7 +22,7 @@ window.HERO_IDS = [
 ];
 
 window.LATELY_IDS = [
-    "12",
+    "s12",
     "s11",
     "s19",
     "p22",
