@@ -7,7 +7,7 @@ window.seriesList.push({
     year: "2025",
     genres: ["Crimen", "Drama"],
     image: "https://raw.githubusercontent.com/Auraflixs/Stranger-things/refs/heads/main/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
-    trailer: "https://www.youtube.com/embed/Ith7z6FzLe0",
+    trailer: "https://www.youtube.com/embed/EyG5ERdXKz8?start=1",
     info: "Cinco reclusas forjan un vínculo único tras un accidente mortal, hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas. La historia se expande en su segunda temporada profundizando en el caos carcelario.",
     featured: true,
     seasons: [
